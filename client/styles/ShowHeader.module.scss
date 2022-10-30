@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  background: rgb(247, 247, 247);
+  border: 2px solid lightgray;
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+  font-size: 18px;
+  padding: 3px;
+  margin-right: 5vw;
+}

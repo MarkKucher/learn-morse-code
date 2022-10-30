@@ -1,0 +1,97 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  .container, .containerWithBits {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap: break-word;
+    text-align: center;
+    max-height: 35vh;
+    width: 50vw;
+    padding: 10px 10px;
+    margin: 20px 0;
+    border: 5px dashed whitesmoke;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      background: lightgray;
+      width: 0.5vw;
+      min-width: 5px;
+      &-thumb {
+        &:active {
+          background: dodgerblue;
+        }
+        background: darkslategray;
+        border-radius: 40%;
+      }
+    }
+  }
+  .containerWithBits {
+    font-size: clamp(25px, 2.5vw, 2.5vw);
+  }
+}
+.active, .passive, .forbidden {
+  cursor: default;
+}
+
+.active {
+  color: dodgerblue;
+}
+
+.passive {
+  animation: infinite cursor-animation 500ms;
+}
+
+.forbidden {
+  color: firebrick;
+  animation: infinite forbidden-cursor 300ms;
+}
+
+.spaces {
+  cursor: default;
+}
+
+.default, .highlighted {
+  cursor: pointer;
+}
+
+.highlighted {
+  color: dodgerblue;
+}
+
+.fakeInput {
+  position: absolute;
+  left: -20vw;
+  width: 0;
+  height: 0;
+}
+
+@keyframes cursor-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes forbidden-cursor {
+  0% {
+    transform: translateX(-2px);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
