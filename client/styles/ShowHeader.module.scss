@@ -1,4 +1,4 @@
-.main {
+@mixin defaultMain {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,4 +10,39 @@
   font-size: 18px;
   padding: 3px;
   margin-right: 5vw;
+  &:active {
+    .arrowDown, .arrowUp {
+      color: dodgerblue;
+    }
+  }
+}
+
+.main, .mainHide, .mainShow {
+  @include defaultMain;
+}
+
+.mainShow {
+  animation: showHeader 300ms;
+}
+
+.mainHide {
+  animation: showHeader reverse 300ms;
+}
+
+@mixin arrowDefault {
+  transition: rotate 300ms;
+  background: transparent;
+  color: darkgray;
+  font-size: 24px;
+}
+
+.arrowUp, .arrowDown {
+  @include arrowDefault;
+}
+
+.arrowUp {
+  rotate: 180deg;
+}
+.arrowDown {
+  rotate: 0;
 }

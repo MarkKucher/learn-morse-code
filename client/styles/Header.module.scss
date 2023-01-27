@@ -1,9 +1,13 @@
 .main {
   top: 0;
   left: 0;
-  position: fixed;
+  position: absolute;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+.leftIcons {
+  display: flex;
 }

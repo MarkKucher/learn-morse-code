@@ -1,6 +1,5 @@
-.main {
+@mixin mainDefault {
   display: flex;
-  flex-direction: column;
   width: 50vw;
   .container, .containerWithBits {
     display: flex;
@@ -24,7 +23,7 @@
         &:active {
           background: dodgerblue;
         }
-        background: darkslategray;
+        background: darkgray;
         border-radius: 40%;
       }
     }
@@ -33,8 +32,25 @@
     font-size: clamp(25px, 2.5vw, 2.5vw);
   }
 }
-.active, .passive, .forbidden {
+
+.main, .mainReverse {
+  @include mainDefault;
+}
+
+.main {
+  flex-direction: column;
+}
+
+.mainReverse {
+  flex-direction: column-reverse;
+}
+
+.active, .passive, .forbidden, .nonFocused {
   cursor: default;
+}
+
+.nonFocused {
+  color: darkgray;
 }
 
 .active {

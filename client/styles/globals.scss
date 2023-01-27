@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Serif, sans-serif;
 }
 
 a {
@@ -11,12 +11,22 @@ a {
   text-decoration: none;
 }
 
-body::-webkit-scrollbar {
-  background: transparent;
-}
-
 * {
   box-sizing: border-box;
+}
+
+div::-webkit-scrollbar {
+  border: 1px solid lightgray;
+  background: whitesmoke;
+  width: 0.5vw;
+  min-width: 5px;
+  &-thumb {
+    &:active {
+      background: darkgray;
+    }
+    background: lightgray;
+    border-radius: 40%;
+  }
 }
 
 .header {
@@ -25,20 +35,41 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   background: white;
-  justify-content: flex-end;
-  padding: 10px 0 12px;
+  padding: 10px 12px;
   border-bottom: 2px solid lightgray;
+}
+
+.header, .showHeader {
+  &-enter {
+    animation: showHeader linear 400ms;
+  }
+  &-exit {
+    animation: showHeader reverse linear 400ms;
+  }
   div {
     margin: 0 10px;
   }
 }
 
-.enter {
-  animation: showHeader 300ms;
+.offeredLanguages, .siteLanguage {
+  display: flex;
+  &-enter {
+    animation: showOfferedLanguages linear 400ms;
+  }
+  &-exit {
+    animation: showOfferedLanguages reverse linear 400ms;
+  }
 }
-.exit {
-  animation: hideHeader 300ms;
+
+@keyframes showOfferedLanguages {
+  from {
+    transform: translateX(10vw);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes showHeader {
@@ -50,8 +81,17 @@ body::-webkit-scrollbar {
   }
 }
 
-@keyframes hideHeader {
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 400ms linear;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes ripple {
   to {
-    transform: translateY(-10vh);
+    transform: scale(4);
+    opacity: 0;
   }
 }

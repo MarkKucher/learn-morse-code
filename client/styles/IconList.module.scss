@@ -1,0 +1,12 @@
+.iconList {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  min-height: 1.7rem;
+  border-bottom: 5px dashed whitesmoke;
+  div {
+    margin-left: 0.5rem;
+  }
+}
+

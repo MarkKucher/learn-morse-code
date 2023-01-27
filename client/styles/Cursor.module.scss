@@ -1,0 +1,49 @@
+.active, .passive, .forbidden, .nonFocused {
+  display: inline-block;
+  cursor: default;
+  color: initial;
+}
+
+.nonFocused {
+  color: darkgray;
+}
+
+.active {
+  color: dodgerblue;
+}
+
+.passive {
+  animation: infinite cursor-animation 500ms;
+}
+
+.forbidden {
+  color: firebrick;
+  animation: infinite forbidden-cursor 300ms;
+}
+
+@keyframes cursor-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes forbidden-cursor {
+  0% {
+    transform: translateX(-2px);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

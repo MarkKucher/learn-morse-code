@@ -1,0 +1,38 @@
+@mixin containersDefault {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 10vh;
+  max-height: 32vh;
+  width: 100%;
+  font-size: 3rem;
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
+  margin: 20px 0;
+  border: 5px dashed whitesmoke;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+}
+
+.fakeInput {
+  position: absolute;
+  left: -20vw;
+  width: 0;
+  height: 0;
+}
+
+.reverseIcon {
+  color: darkgray;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: rgba(225, 225, 225, 0.5);
+}

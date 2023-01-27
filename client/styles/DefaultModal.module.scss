@@ -1,0 +1,27 @@
+@use 'modal';
+
+.main {
+  @include modal.main;
+}
+
+.header {
+  @include modal.header;
+}
+
+.content {
+  @include modal.content;
+}
+
+.icon {
+  @include modal.icon;
+}
+
+.table {
+  @include modal.table;
+}
+
+.contentCentered {
+  @include modal.content;
+  justify-items: center;
+  justify-content: center;
+}

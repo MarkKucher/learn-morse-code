@@ -1,0 +1,31 @@
+@use 'MainInput.module' as m;
+@use 'input';
+
+.main {
+  @include m.containersDefault;
+}
+
+.spaces {
+  cursor: default;
+}
+
+.default, .highlighted {
+  cursor: pointer;
+}
+
+.highlighted {
+  color: dodgerblue;
+}
+
+.incorrect, .correct {
+  width: 100%;
+  height: 100%;
+}
+
+.incorrect {
+  background-color: rgba(178, 34, 34, 0.5);
+}
+
+.correct {
+  background-color: rgba(50, 205, 50, 0.5);
+}

@@ -1,0 +1,30 @@
+@use 'input';
+
+.main {
+  @include input.output;
+  color: darkgray;
+  font-size: 3rem;
+}
+
+.spaces, .character, .placeholderCharacter {
+  cursor: default;
+}
+
+.fakeInput {
+  position: absolute;
+  left: -20vw;
+  width: 0;
+  height: 0;
+}
+
+.placeholderCharacter {
+  color: gray;
+}
+
+.correct {
+  color: limegreen;
+}
+
+.incorrect {
+  color: firebrick;
+}

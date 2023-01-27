@@ -1,17 +1,30 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "../styles/ShowHeader.module.scss"
-import Image from "next/image";
-import bottomArrow from "../assets/bottom-arrow.png";
-import {useDispatch} from "react-redux";
-import {toggleShowHeader} from "../store/slices/showHeader";
+import {useDispatch, useSelector} from "react-redux";
+import {selectShowHeader, toggleShowHeader} from "../store/slices/showHeader";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {CSSTransition} from "react-transition-group";
 
 const ShowHeader = () => {
     const dispatch = useDispatch()
+    const {showHeader} = useSelector(selectShowHeader)
+    const nodeRef = useRef(null)
 
     return (
-        <div className={styles.main} onClick={() => {dispatch(toggleShowHeader())}}>
-            <Image width={32} height={20} src={bottomArrow}/>
-        </div>
+        <CSSTransition
+            in={showHeader}
+            timeout={350}
+            classNames={'showHeader'}
+            nodeRef={nodeRef}
+        >
+            <div ref={nodeRef} className={styles.main} onClick={() => {dispatch(toggleShowHeader())}}>
+                <FontAwesomeIcon
+                    className={showHeader ? styles.arrowUp : styles.arrowDown}
+                    icon={faChevronDown}
+                />
+            </div>
+        </CSSTransition>
     );
 };
 

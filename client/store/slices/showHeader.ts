@@ -7,7 +7,7 @@ interface showHeaderState {
 }
 
 const initialState: showHeaderState = {
-    showHeader: false
+    showHeader: true
 }
 
 const showHeaderSlice = createSlice({

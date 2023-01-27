@@ -1,0 +1,50 @@
+@use 'input';
+
+.default, .highlighted {
+  cursor: pointer;
+}
+
+.highlighted {
+  color: dodgerblue;
+  font-weight: bold;
+}
+
+.spaces {
+  cursor: default;
+}
+
+.incorrect, .correct {
+  cursor: default;
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.incorrect {
+  color: firebrick;
+}
+
+.correct {
+  color: limegreen;
+}
+
+.moveCursor {
+  cursor: default;
+}
+
+.typingOutput, .translationOutput {
+  @include input.output;
+}
+
+.accurate {
+  color: limegreen;
+}
+
+.wrong {
+  color: firebrick;
+}
+
+.accurate, .wrong {
+  font-size: 1rem;
+  margin-right: auto;
+  margin-left: 0.5rem;
+}

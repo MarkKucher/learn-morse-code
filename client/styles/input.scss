@@ -1,0 +1,10 @@
+@mixin output {
+  padding: 0.5rem 0.5rem 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  overflow-x: unset;
+  overflow-y: auto;
+}

@@ -1,0 +1,9 @@
+@use 'icons';
+
+.icon {
+  @include icons.iconDefault;
+}
+
+.animatedIcon {
+  @include icons.animatedIcon;
+}

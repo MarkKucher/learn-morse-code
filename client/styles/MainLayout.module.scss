@@ -5,7 +5,15 @@
   justify-content: center;
   align-items: center;
   font-family: Serif;
-  font-size: clamp(30px, 3vw, 3vw);
+  font-size: 2rem;
+  @media screen and (max-width: 600px) {
+    font-size: 1rem;
+  }
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.picture {
+  position: fixed;
   background-image: url("../assets/old-gray-cement-wall-backgrounds_34552-325.webp");
   background-repeat: no-repeat;
   background-size: cover;

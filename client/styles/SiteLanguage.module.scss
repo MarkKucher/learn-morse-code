@@ -1,0 +1,24 @@
+@use 'icons';
+
+.main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icon {
+  @include icons.iconDefault;
+  margin: 0;
+}
+
+.moveToInitialPosition {
+  @include icons.iconDefault;
+  pointer-events: none;
+  animation: moveToInitialPosition 100ms;
+}
+
+@keyframes moveToInitialPosition {
+  to {
+    transform: translateX(0);
+  }
+}

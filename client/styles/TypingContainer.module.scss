@@ -1,0 +1,9 @@
+@use 'MainInput.module' as m;
+
+.main {
+  @include m.containersDefault;
+}
+
+.spaces {
+  cursor: default;
+}

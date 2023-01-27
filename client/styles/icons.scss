@@ -1,0 +1,39 @@
+@mixin iconDefault {
+  padding: 5px;
+  min-width: clamp(50px, 4vw, 4vw);
+  font-size: 24px;
+  border-radius: 35%;
+  background: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid lightgray;
+  color: lightgray;
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    border-color: darkgray;
+    color: darkgray;
+  }
+  &:active {
+    border-color: dodgerblue;
+    color: dodgerblue;
+  }
+}
+
+@mixin animatedIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1rem;
+  color: gray;
+  position: relative;
+  overflow: hidden;
+  transition: background 400ms;
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
