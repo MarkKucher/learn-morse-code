@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 10vh;
+  min-height: 110px;
   max-height: 32vh;
   width: 100%;
   font-size: 3rem;
@@ -20,6 +20,7 @@
   flex-direction: column;
   align-items: center;
   width: 70vw;
+  min-width: 248.5px; //70% from 355px
 }
 
 .fakeInput {

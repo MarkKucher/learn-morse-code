@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styles from '../../styles/CheckInput.module.scss';
 import Cursor from "../translatorElements/cursor";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {selectTranslator, setShouldShowResult} from "../../store/slices/translator";
+import {selectTranslator, setSentence, setShouldShowResult, setTextToCheck} from "../../store/slices/translator";
 import {selectTypingType} from "../../store/slices/typingType";
 import {checkAffiliation} from "../../adjuvant/checkAffiliation";
 import {noMorse} from "../../utils/morse-code-no";
@@ -16,6 +16,7 @@ import {findIndexInWordsLikeArray} from "../../adjuvant/searching/findIndexInWor
 import {findSentenceIndexInReversedArray} from "../../adjuvant/searching/findSentenceIndexInReversedArray";
 import {findIndexInBitLikeArray} from "../../adjuvant/searching/findIndexInBitLikeArray";
 import {transformToWordLikeLook} from "../../adjuvant/transform/transformToWordLikeLook";
+import {skippedKey} from "../../utils/skippedKey";
 
 interface CheckInputProps {
     text: string[];
@@ -96,46 +97,55 @@ const CheckInput: React.FC<CheckInputProps> = (
     }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.ctrlKey || e.altKey || e.metaKey) return;
         let index = text.indexOf('|')
+        let isKeyOperated = false;
+        let shouldSkip = false;
+        skippedKey.forEach((key) => {
+            if(key === e.key) {
+                shouldSkip = true
+            }
+        })
+
+        if(shouldSkip) return;
+
         switch (e.key) {
             case 'ArrowRight':
+                isKeyOperated = true
                 if(index === text.length - 1) {
                     forbid()
                     break
                 }
-                dispatch(setText([...text.slice(0, index), text[index + 1], '|', ...text.slice(index + 2)]))
+                dispatch(setTextToCheck([...text.slice(0, index), text[index + 1], '|', ...text.slice(index + 2)]))
                 break
             case 'ArrowLeft':
+                isKeyOperated = true
                 if(index === 0) {
                     forbid()
                     return;
                 }
-                dispatch(setText([...text.slice(0, index - 1), '|', text[index - 1], ...text.slice(index + 1)]))
+                dispatch(setTextToCheck([...text.slice(0, index - 1), '|', text[index - 1], ...text.slice(index + 1)]))
                 break
             case 'Backspace':
+                isKeyOperated = true
                 if(index === 0) {
                     forbid()
                     return;
                 }
                 emitWriting()
-                dispatch(setText([...text.slice(0, index - 1), '|', ...text.slice(index + 1)]))
+                dispatch(setTextToCheck([...text.slice(0, index - 1), '|', ...text.slice(index + 1)]))
                 break
             case 'Delete':
+                isKeyOperated = true
                 if(index === text.length - 1) {
                     forbid()
                     return;
                 }
                 emitWriting()
-                dispatch(setText([...text.slice(0, index + 1), ...text.slice(index + 2)]))
-                break
-            case 'Enter':
+                dispatch(setTextToCheck([...text.slice(0, index + 1), ...text.slice(index + 2)]))
                 break
         }
-    }
-
-    const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key !== 'Enter') {
-            console.log(typeof e)
+        if(!isKeyOperated) {
             emitWriting()
             changeSentence(e.key)
         }
@@ -194,7 +204,6 @@ const CheckInput: React.FC<CheckInputProps> = (
                 value={''}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
-                onKeyPress={onKeyPress}
             />
             {isReversed ?
                 wordsLikeOutput.map((arr, index) => arr[0] === ' ' ?

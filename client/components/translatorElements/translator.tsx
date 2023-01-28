@@ -25,6 +25,7 @@ import {findObjectByValue} from "../../adjuvant/searching/findObjectByValue";
 import {switchIsHighlighted} from "../../adjuvant/switchIsHighlighted";
 import {findSentenceIndexInReversedArray} from "../../adjuvant/searching/findSentenceIndexInReversedArray";
 import {translate} from "../../adjuvant/translate";
+import {skippedKey} from "../../utils/skippedKey";
 
 const Translator = () => {
     const {selected} = useSelector(selectSiteLanguageState);
@@ -101,9 +102,21 @@ const Translator = () => {
     }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.ctrlKey || e.altKey || e.metaKey) return;
         let index = findObjectByValue(sentence, '|')
+        let isKeyOperated = false;
+        let shouldSkip = false;
+        skippedKey.forEach((key) => {
+            if(key === e.key) {
+                shouldSkip = true
+            }
+        })
+
+        if(shouldSkip) return;
+
         switch (e.key) {
             case 'ArrowRight':
+                isKeyOperated = true
                 if(index === sentence.length - 1) {
                     forbidden()
                     break
@@ -111,6 +124,7 @@ const Translator = () => {
                 dispatch(setSentence([...sentence.slice(0, index), sentence[index + 1], {value: '|'}, ...sentence.slice(index + 2)]))
                 break
             case 'ArrowLeft':
+                isKeyOperated = true
                 if(index === 0) {
                     forbidden()
                     return;
@@ -118,6 +132,7 @@ const Translator = () => {
                 dispatch(setSentence([...sentence.slice(0, index - 1), {value: '|'}, sentence[index - 1], ...sentence.slice(index + 1)]))
                 break
             case 'Backspace':
+                isKeyOperated = true
                 if(index === 0) {
                     forbidden()
                     return;
@@ -126,6 +141,7 @@ const Translator = () => {
                 dispatch(setSentence([...sentence.slice(0, index - 1), {value: '|'}, ...sentence.slice(index + 1)]))
                 break
             case 'Delete':
+                isKeyOperated = true
                 if(index === sentence.length - 1) {
                     forbidden()
                     return;
@@ -133,13 +149,8 @@ const Translator = () => {
                 emitWriting()
                 dispatch(setSentence([...sentence.slice(0, index + 1), ...sentence.slice(index + 2)]))
                 break
-            case 'Enter':
-                break
         }
-    }
-
-    const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key !== 'Enter') {
+        if(!isKeyOperated) {
             emitWriting()
             changeSentence(e.key)
         }
@@ -175,7 +186,7 @@ const Translator = () => {
                    ref={ref}
                    type="text"
                    className={styles.fakeInput}
-                   onKeyPress={onKeyPress}/>
+            />
             <TypingContainer inputRef={ref} highlight={highlight}/>
             <TranslationContainer highlight={highlight}/>
         </div>

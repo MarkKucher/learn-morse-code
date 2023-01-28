@@ -1,6 +1,8 @@
 .main {
   width: 100vw;
   height: 100vh;
+  min-width: 355px;
+  min-height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,6 +12,7 @@
     font-size: 1rem;
   }
   background-color: rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .picture {

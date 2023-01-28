@@ -31,8 +31,9 @@ div::-webkit-scrollbar {
 }
 
 .header {
-  width: 100vw;
-  height: 10vh;
+  width: 100%;
+  min-width: 355px;
+  min-height: clamp(60px, 60px, 10vh);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -66,7 +67,7 @@ div::-webkit-scrollbar {
 
 @keyframes showOfferedLanguages {
   from {
-    transform: translateX(10vw);
+    transform: translateX(10rem);
   }
   to {
     transform: translateX(0);
@@ -75,10 +76,10 @@ div::-webkit-scrollbar {
 
 @keyframes showHeader {
   from {
-    transform: translateY(-10vh);
+    transform: translateY(clamp(-65px, -65px, -10vh));
   }
   to {
-    transform: translateY(0vh);
+    transform: translateY(0);
   }
 }
 
