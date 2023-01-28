@@ -5,26 +5,28 @@ import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import {useAppSelector} from "../../../hooks/redux";
 import {selectTranslator, singleChar} from "../../../store/slices/translator";
 import {selectTypingType} from "../../../store/slices/typingType";
+import {object} from "prop-types";
 
 interface CopyProps {
     isTypingOutput: boolean;
-    text?: string[] | singleChar[];
+    text?: string[];
+    arrayOfSingleChars?: singleChar[];
 }
 
-const Copy: React.FC<CopyProps> = ({isTypingOutput, text}) => {
-    const {reversedArray, translation} = useAppSelector(selectTranslator);
+const Copy: React.FC<CopyProps> = ({isTypingOutput, text, arrayOfSingleChars}) => {
+    const {translation} = useAppSelector(selectTranslator);
     const {isReversed} = useAppSelector(selectTypingType);
 
     const onClick = async () => {
         let output = ''
-        if(isTypingOutput && text) {
-            if(text[0] instanceof Object) {
-                text.filter((obj: singleChar) => obj.value !== '|').forEach((obj: singleChar) => {
-                    output += obj.value
-                })
-            } else {
+        if(isTypingOutput) {
+            if(text) {
                 text.filter((s: string) => s !== '|').forEach((s: string) => {
                     output += s
+                })
+            } else if (arrayOfSingleChars) {
+                arrayOfSingleChars.filter((obj: singleChar) => obj.value !== '|').forEach((obj: singleChar) => {
+                    output += obj.value
                 })
             }
         } else {

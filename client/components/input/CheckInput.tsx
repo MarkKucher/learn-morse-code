@@ -17,18 +17,16 @@ import {findSentenceIndexInReversedArray} from "../../adjuvant/searching/findSen
 import {findIndexInBitLikeArray} from "../../adjuvant/searching/findIndexInBitLikeArray";
 import {transformToWordLikeLook} from "../../adjuvant/transform/transformToWordLikeLook";
 
-interface customInputProps {
+interface CheckInputProps {
     text: string[];
     setText: Function;
-    shouldFocus?: boolean;
-    setShouldFocus?: Function;
     placeholder?: string;
     rootClassName?: string;
     charactersClassName?: string;
 }
 
-const checkInput: React.FC<customInputProps> = (
-    {text, setText, placeholder, shouldFocus, setShouldFocus, rootClassName, charactersClassName}
+const CheckInput: React.FC<CheckInputProps> = (
+    {text, setText, placeholder, rootClassName, charactersClassName}
 ) => {
     const [isForbiddenKeyPressed, setIsForbiddenKeyPressed] = useState<boolean>(false)
     const [isWriting, setIsWriting] = useState<boolean>(false)
@@ -90,14 +88,14 @@ const checkInput: React.FC<customInputProps> = (
         }
     }
 
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.value.length > 1) {
             emitWriting()
             changeSentence(e.target.value)
         }
     }
 
-    const onKeyDown = (e) => {
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         let index = text.indexOf('|')
         switch (e.key) {
             case 'ArrowRight':
@@ -135,8 +133,9 @@ const checkInput: React.FC<customInputProps> = (
         }
     }
 
-    const onKeyPress = (e) => {
+    const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key !== 'Enter') {
+            console.log(typeof e)
             emitWriting()
             changeSentence(e.key)
         }
@@ -226,4 +225,4 @@ const checkInput: React.FC<customInputProps> = (
     );
 };
 
-export default checkInput;
+export default CheckInput;

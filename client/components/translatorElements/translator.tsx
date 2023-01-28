@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import styles from "../../styles/MainInput.module.scss";
 import {checkAffiliation} from "../../adjuvant/checkAffiliation";
 import {noMorse} from "../../utils/morse-code-no";
@@ -7,7 +7,7 @@ import {specialSymbolsMorse} from "../../utils/morse-code-special-symbols";
 import {useSelector} from "react-redux";
 import {selectSiteLanguageState} from "../../store/slices/siteLanguage";
 import {getValueByKey} from "../../adjuvant/getValueByKey";
-import {MorseCodeLanguage} from "../../utils/morse-code-language";
+import {MorseCodeLanguage, MorseCodeLanguageType} from "../../utils/morse-code-language";
 import {selectTypingType} from "../../store/slices/typingType";
 import TypingContainer from "./typing/typingContainer";
 import TranslationContainer from "./translation/translationContainer";
@@ -17,28 +17,27 @@ import {
     setIsFocused,
     setIsForbiddenKeyPressed,
     setIsWriting,
-    setReversedArray,
     setSentence,
     setTranslation,
-    setTranslationRelationships, singleChar
+    setTranslationRelationships
 } from "../../store/slices/translator";
 import {findObjectByValue} from "../../adjuvant/searching/findObjectByValue";
 import {switchIsHighlighted} from "../../adjuvant/switchIsHighlighted";
-import {findCursorIndex} from "../../adjuvant/searching/findCursorIndex";
 import {findSentenceIndexInReversedArray} from "../../adjuvant/searching/findSentenceIndexInReversedArray";
 import {translate} from "../../adjuvant/translate";
 
 const Translator = () => {
     const {selected} = useSelector(selectSiteLanguageState);
     const {isReversed} = useSelector(selectTypingType);
-    const {sentence, translation, translationRelationships, isWriting, reversedArray, isFocused} = useAppSelector(selectTranslator);
+    const {sentence, translation, translationRelationships, isWriting, reversedArray} = useAppSelector(selectTranslator);
     const dispatch = useAppDispatch();
     const ref = useRef<HTMLInputElement>(null);
     const timeoutRef = useRef<any>(null);
     const forbiddenRef = useRef<any>(null);
 
     useEffect(() => {
-        dispatch(setTranslationRelationships(getValueByKey(selected, [MorseCodeLanguage], false)))
+        const value = getValueByKey<MorseCodeLanguageType>(selected, [MorseCodeLanguage], false)
+        typeof value === 'object' && dispatch(setTranslationRelationships(value))
     }, [selected])
 
 
@@ -94,14 +93,14 @@ const Translator = () => {
         }
     }
 
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.value.length > 1) {
             emitWriting()
             changeSentence(e.target.value)
         }
     }
 
-    const onKeyDown = (e) => {
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         let index = findObjectByValue(sentence, '|')
         switch (e.key) {
             case 'ArrowRight':
@@ -139,7 +138,7 @@ const Translator = () => {
         }
     }
 
-    const onKeyPress = (e) => {
+    const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key !== 'Enter') {
             emitWriting()
             changeSentence(e.key)

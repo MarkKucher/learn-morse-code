@@ -8,7 +8,7 @@ interface AnimatedIcon {
 }
 
 const AnimatedIcon: React.FC<AnimatedIcon> = ({ children, onClick,bigger }) => {
-    const createRipple = (event) => {
+    const createRipple = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation()
         onClick && onClick()
         const button = event.currentTarget;

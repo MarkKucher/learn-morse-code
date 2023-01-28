@@ -6,6 +6,7 @@ import styles from "../styles/DefaultModal.module.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import {selectTranslator} from "../store/slices/translator";
+import {getObjectValuesTypeFriendly} from "../adjuvant/getKeyValueTypeFriendly";
 
 interface MorseCodeTableProps {
     close: Function;
@@ -28,10 +29,10 @@ const MorseCodeTable: React.FC<MorseCodeTableProps> = ({close}) => {
                 </div>
                 <div className={styles.contentCentered}>
                     <div className={styles.table}>
-                        {Object.keys(translationRelationships).map((key, index) => <div>
-                            <div key={key}>{key}</div>
-                            <div key={key + 'hyphen'}>-</div>
-                            <div key={key + 'translation'}>{translationRelationships[key]}</div>
+                        {getObjectValuesTypeFriendly(translationRelationships).map((value, index) => <div key={value}>
+                            <div>{Object.keys(translationRelationships)[index]}</div>
+                            <div>-</div>
+                            <div>{value}</div>
                         </div>)}
                     </div>
                 </div>

@@ -1,5 +1,7 @@
+import {MorseCodeType} from "../utils/morse-code-language";
 
-export const getValueByKey = (key: string, objects: Object[], reverse: boolean) => {
+
+export const getValueByKey = <ObjT>(key: string, objects: ObjT[], reverse: boolean): ObjT[keyof ObjT] | string => {
     key = key.split('').filter(l => l !== '|').join('')
     let result = '';
     if(reverse) {
@@ -7,7 +9,7 @@ export const getValueByKey = (key: string, objects: Object[], reverse: boolean) 
         objects.map((obj) => {
             if(!result) {
                 for (const objKey in obj) {
-                    if(obj[objKey] === key) {
+                    if(obj[objKey as keyof MorseCodeType] === key) {
                         result = objKey;
                         break;
                     }
@@ -20,7 +22,7 @@ export const getValueByKey = (key: string, objects: Object[], reverse: boolean) 
         if(!result) {
             for (const objKey in obj) {
                 if(key === objKey) {
-                    result = obj[objKey];
+                    result = obj[objKey as keyof MorseCodeType];
                     break;
                 }
             }

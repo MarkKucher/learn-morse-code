@@ -3,47 +3,40 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
 import {enMorse} from "../../utils/morse-code-en";
 import {ruMorse} from "../../utils/morse-code-ru";
+import {MorseCodeType} from "../../utils/morse-code-language";
 
 export type singleChar = {value: string, isHighlighted?: boolean, isTranslated?: boolean};
 
 interface translatorState {
     sentence: singleChar[];
-    prevSentence: singleChar[];
     translation: singleChar[];
-    prevTranslation: singleChar[];
     reversedArray: singleChar[];
     highlightedCouple: number[];
     isWriting: boolean;
     isForbiddenKeyPressed: boolean;
     isFocused: boolean;
     translationRelationships: typeof uaMorse | typeof enMorse | typeof ruMorse;
-    prevReversedArray: singleChar[];
     isTranslationVisible: boolean;
     textToCheck: string[];
     correctIndexes: number[];
     accuracy: number;
     shouldShowResult: boolean;
-    shouldAutoTranslate: boolean;
 }
 
 const initialState: translatorState = {
     sentence: [{value: '|', isHighlighted: false}],
-    prevSentence: [{value: '|', isHighlighted: false}],
     translation: [],
-    prevTranslation: [],
     reversedArray: [{value: '|', isHighlighted: false}],
     highlightedCouple: [],
     isWriting: false,
     isForbiddenKeyPressed: false,
     isFocused: false,
     translationRelationships: uaMorse,
-    prevReversedArray: [{value: '|', isHighlighted: false}],
     isTranslationVisible: true,
     textToCheck: ['|'],
     correctIndexes: [],
     accuracy: 0,
-    shouldShowResult: false,
-    shouldAutoTranslate: true
+    shouldShowResult: false
 }
 
 const translatorSlice = createSlice({
@@ -53,14 +46,8 @@ const translatorSlice = createSlice({
         setSentence: (state, action: PayloadAction<singleChar[]>) => {
             state.sentence = action.payload
         },
-        setPrevSentence: (state, action: PayloadAction<singleChar[]>) => {
-            state.prevSentence = action.payload
-        },
         setTranslation: (state, action: PayloadAction<singleChar[]>) => {
             state.translation = action.payload
-        },
-        setPrevTranslation: (state, action: PayloadAction<singleChar[]>) => {
-            state.prevTranslation = action.payload
         },
         setReversedArray: (state, action: PayloadAction<singleChar[]>) => {
             state.reversedArray = action.payload
@@ -77,11 +64,8 @@ const translatorSlice = createSlice({
         setIsFocused: (state, action: PayloadAction<boolean>) => {
             state.isFocused = action.payload
         },
-        setTranslationRelationships: (state, action: PayloadAction<Object>) => {
+        setTranslationRelationships: (state, action: PayloadAction<MorseCodeType>) => {
             state.translationRelationships = action.payload
-        },
-        setPrevReversedArray: (state, action: PayloadAction<singleChar[]>) => {
-            state.prevReversedArray = action.payload
         },
         setIsTranslationVisible: (state, action: PayloadAction<boolean>) => {
             state.isTranslationVisible = action.payload
@@ -97,17 +81,14 @@ const translatorSlice = createSlice({
         },
         setShouldShowResult: (state, action: PayloadAction<boolean>) => {
             state.shouldShowResult = action.payload
-        },
-        setShouldAutoTranslate: (state, action: PayloadAction<boolean>) => {
-            state.shouldAutoTranslate = action.payload
         }
     }
 })
 
-export const {setSentence, setPrevSentence, setTranslation, setPrevTranslation,
+export const {setSentence,  setTranslation,
     setTranslationRelationships, setIsForbiddenKeyPressed, setHighlightedCouple,
-    setIsFocused, setReversedArray, setIsWriting, setPrevReversedArray, setIsTranslationVisible,
-    setTextToCheck, setCorrectIndexes, setAccuracy, setShouldShowResult, setShouldAutoTranslate
+    setIsFocused, setReversedArray, setIsWriting, setIsTranslationVisible,
+    setTextToCheck, setCorrectIndexes, setAccuracy, setShouldShowResult
 } = translatorSlice.actions;
 export const selectTranslator = (state: RootState) => state.translator;
 export default translatorSlice.reducer;

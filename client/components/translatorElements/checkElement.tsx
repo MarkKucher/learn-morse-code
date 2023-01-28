@@ -1,24 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from "../../styles/CheckElement.module.scss";
-import CustomInput from "../input/checkInput";
-import {selectTranslator, setShouldAutoTranslate, setTextToCheck} from "../../store/slices/translator";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {selectTranslator, setTextToCheck} from "../../store/slices/translator";
+import {useAppSelector} from "../../hooks/redux";
 import {selectSiteLanguageState} from "../../store/slices/siteLanguage";
-import {translate} from "../../adjuvant/translate";
-import {selectTypingType} from "../../store/slices/typingType";
-import CheckInput from "../input/checkInput";
+import CheckInput from "../input/CheckInput";
 
 const CheckElement = () => {
-    const {shouldShowResult, accuracy, textToCheck, shouldAutoTranslate} = useAppSelector(selectTranslator)
+    const {shouldShowResult, accuracy, textToCheck} = useAppSelector(selectTranslator)
     const {selected} = useAppSelector(selectSiteLanguageState)
-    const {isReversed} = useAppSelector(selectTypingType)
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        return () => {
-            isReversed && dispatch(setShouldAutoTranslate(false))
-        }
-    }, [])
 
     return (
         <div className={shouldShowResult ? accuracy >= 80 ? styles.correct : styles.incorrect : styles.main}>

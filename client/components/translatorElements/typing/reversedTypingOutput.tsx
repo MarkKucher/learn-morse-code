@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {
     selectTranslator,
-    setReversedArray, setSentence, singleChar,
+    setReversedArray, setSentence
 } from "../../../store/slices/translator";
 import Cursor from "../cursor";
 import styles from "../../../styles/Translator.module.scss";
 import {transformToReversedArray} from "../../../adjuvant/transform/transformToReversedArray";
 import {transformTranslationToSentence} from "../../../adjuvant/transform/transformTranslationToSentence";
-import {switchIsHighlighted} from "../../../adjuvant/switchIsHighlighted";
 import {findSentenceIndexInReversedArray} from "../../../adjuvant/searching/findSentenceIndexInReversedArray";
 
 interface ReversedTypingOutput {
@@ -16,7 +15,7 @@ interface ReversedTypingOutput {
 }
 
 const ReversedTypingOutput: React.FC<ReversedTypingOutput> = ({highlight}) => {
-    const {reversedArray, sentence, highlightedCouple, prevReversedArray, translation, translationRelationships} = useAppSelector(selectTranslator);
+    const {reversedArray, sentence, translation, translationRelationships} = useAppSelector(selectTranslator);
     const [isSentenceCompiled, setIsSentenceCompiled] = useState<boolean>(false)
     const [isReversedArrayCompiled, setIsReversedArrayCompiled] = useState<boolean>(false)
     const dispatch = useAppDispatch();

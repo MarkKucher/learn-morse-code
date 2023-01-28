@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import {
-    selectTranslator, setShouldAutoTranslate, setTranslation
-} from "../../../store/slices/translator";
+import {useAppSelector} from "../../../hooks/redux";
+import {selectTranslator} from "../../../store/slices/translator";
 import styles from "../../../styles/Translator.module.scss";
 import {findIndexInWordsLikeArray} from "../../../adjuvant/searching/findIndexInWordsLikeArray";
-import {findCursorIndex} from "../../../adjuvant/searching/findCursorIndex";
 import {transformToWordLikeLook} from "../../../adjuvant/transform/transformToWordLikeLook";
 
 interface ReversedTranslationOutput {
@@ -13,9 +10,8 @@ interface ReversedTranslationOutput {
 }
 
 const ReversedTranslationOutput: React.FC<ReversedTranslationOutput> = ({highlight}) => {
-    const {translation, sentence, shouldAutoTranslate} = useAppSelector(selectTranslator);
+    const {translation} = useAppSelector(selectTranslator);
     const [wordsLikeOutput, setWordsLikeOutput] = useState<string[][]>([]);
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
         setWordsLikeOutput(transformToWordLikeLook(translation.map(el => el.value)))
