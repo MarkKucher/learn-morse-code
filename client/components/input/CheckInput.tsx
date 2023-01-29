@@ -29,6 +29,7 @@ interface CheckInputProps {
 const CheckInput: React.FC<CheckInputProps> = (
     {text, setText, placeholder, rootClassName, charactersClassName}
 ) => {
+    const [isMobile, setIsMobile] = useState<boolean>(false)
     const [isForbiddenKeyPressed, setIsForbiddenKeyPressed] = useState<boolean>(false)
     const [isWriting, setIsWriting] = useState<boolean>(false)
     const [isFocused, setIsFocused] = useState<boolean>(false)
@@ -41,6 +42,10 @@ const CheckInput: React.FC<CheckInputProps> = (
     const {translationRelationships, correctIndexes, shouldShowResult} = useAppSelector(selectTranslator);
     const {isReversed} = useAppSelector(selectTypingType);
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 600 || window.innerHeight < 600)
+    }, [])
 
     useEffect(() => {
         if(text.length === 1 && placeholder && !isFocused) {
@@ -90,9 +95,11 @@ const CheckInput: React.FC<CheckInputProps> = (
     }
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.value.length > 1) {
+        let value: string = e.target.value;
+        if(isMobile) value = value.toLowerCase()
+        if(value.length > 1 || isMobile) {
             emitWriting()
-            changeSentence(e.target.value)
+            changeSentence(value)
         }
     }
 
@@ -197,8 +204,8 @@ const CheckInput: React.FC<CheckInputProps> = (
         <div onClick={focus} className={rootClassName ? rootClassName : styles.main}>
             <span className={styles.spaces} onClick={moveCursor(0)}>&#160;&#160;</span>
             <input
+                type='text'
                 ref={ref}
-                type="text"
                 onBlur={() => {setIsFocused(false)}}
                 className={styles.fakeInput}
                 value={''}

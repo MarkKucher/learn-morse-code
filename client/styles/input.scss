@@ -7,4 +7,10 @@
   justify-content: center;
   overflow-x: unset;
   overflow-y: auto;
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
+  @media screen and (max-height: 600px) {
+    font-size: 2rem;
+  }
 }

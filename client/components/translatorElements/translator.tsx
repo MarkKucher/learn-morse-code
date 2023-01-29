@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "../../styles/MainInput.module.scss";
 import {checkAffiliation} from "../../adjuvant/checkAffiliation";
 import {noMorse} from "../../utils/morse-code-no";
@@ -35,6 +35,11 @@ const Translator = () => {
     const ref = useRef<HTMLInputElement>(null);
     const timeoutRef = useRef<any>(null);
     const forbiddenRef = useRef<any>(null);
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 600 || window.innerHeight < 600)
+    }, [])
 
     useEffect(() => {
         const value = getValueByKey<MorseCodeLanguageType>(selected, [MorseCodeLanguage], false)
@@ -95,9 +100,11 @@ const Translator = () => {
     }
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.value.length > 1) {
+        let value: string = e.target.value;
+        if(isMobile) value = value.toLowerCase()
+        if(value.length > 1 || isMobile) {
             emitWriting()
-            changeSentence(e.target.value)
+            changeSentence(value)
         }
     }
 
@@ -158,7 +165,7 @@ const Translator = () => {
 
     const highlight = (index: number, typingIndex?: number | null, translationIndex?: number | null) => {
         return (e: InputEvent) => {
-            e.preventDefault()
+            e.stopPropagation()
             if(isReversed) {
                 let indexInSentence = findSentenceIndexInReversedArray(reversedArray, index)
                 dispatch(setSentence(switchIsHighlighted(sentence, indexInSentence)))
@@ -179,13 +186,14 @@ const Translator = () => {
 
     return (
         <div className={styles.main}>
-            <input value={''}
-                   onChange={onChange}
-                   onKeyDown={onKeyDown}
-                   onBlur={() => {dispatch(setIsFocused(false))}}
-                   ref={ref}
-                   type="text"
-                   className={styles.fakeInput}
+            <input
+                value={''}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                onBlur={() => {dispatch(setIsFocused(false))}}
+                ref={ref}
+                type="text"
+                className={styles.fakeInput}
             />
             <TypingContainer inputRef={ref} highlight={highlight}/>
             <TranslationContainer highlight={highlight}/>

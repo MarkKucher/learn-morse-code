@@ -33,7 +33,7 @@ const IconList: React.FC<IconListProps> = ({type}) => {
     switch (type) {
         case typeStates.typing:
             return (
-                <div className={styles.iconList} onClick={(e) => {e.stopPropagation()}}>
+                <div className={styles.iconListTyping} onClick={(e) => {e.stopPropagation()}}>
                     <Copy isTypingOutput={true} arrayOfSingleChars={sentence}/>
                     <ClearInput isArrayConsistOfString={false} setText={setSentence} setTranslation={setTranslation}/>
                 </div>

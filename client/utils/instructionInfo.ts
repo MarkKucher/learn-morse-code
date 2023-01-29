@@ -8,8 +8,8 @@ export type contentStructure = oneParagraph[]
 export const uaText: contentStructure = [
     {text: 'Ритм у коді написаного азбукою Морзе:',
         ul: [
-            'між крапками і рисками у слові, сама крапка або риска - 1зп(звукова поділка)',
-            'між буквами - 3зп',
+            'між крапками і рисками у слові, сама крапка - 1зп(звукова поділка)',
+            'між буквами, риска - 3зп',
             'між словами - 7зп'
         ]
     },
@@ -31,8 +31,8 @@ export const uaText: contentStructure = [
 export const ruText = [
     {text: 'Ритм кода написаного азбукой Морзе:',
         ul: [
-            'между точками и чёрточками в слове, сама точка или чёрточка - 1зд(звуковое деление)',
-            'между буквами - 3зд',
+            'между точками и чёрточками в слове, сама точка - 1зд(звуковое деление)',
+            'между буквами, чёрточка - 3зд',
             'между словами - 7зд'
         ]
     },
@@ -54,8 +54,8 @@ export const ruText = [
 export const enText = [
     {text: 'The rhythm in the Morse code :',
         ul: [
-            'between dots and hyphens, dots and hyphens itself - 1sd(sound division)',
-            'between characters - 3sd',
+            'between dots and hyphens, dot itself - 1sd(sound division)',
+            'between characters, hyphen - 3sd',
             'between words - 7sd'
         ]
     },

@@ -6,7 +6,6 @@ import ReversedTypingOutput from "./reversedTypingOutput";
 import TypingOutput from "./typingOutput";
 import {selectTranslator, setIsFocused} from "../../../store/slices/translator";
 import IconList, {typeStates} from "../icons/iconList";
-import {Reference} from "@typescript-eslint/scope-manager";
 
 interface TypingContainerProps {
     highlight: Function;

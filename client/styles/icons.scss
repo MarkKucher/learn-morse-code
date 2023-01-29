@@ -27,7 +27,15 @@
   align-items: center;
   justify-content: center;
   width: 1.5rem;
-  height: 1.5rem;
+  min-height: 1.5rem;
+  @media screen and (max-width: 600px){
+    width: 1.7rem;
+    min-height: 1.7rem;
+  }
+  @media screen and (max-height: 600px){
+    width: 1.7rem;
+    min-height: 1.7rem;
+  }
   font-size: 1rem;
   color: gray;
   position: relative;
