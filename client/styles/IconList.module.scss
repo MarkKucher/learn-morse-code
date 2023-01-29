@@ -1,7 +1,7 @@
 .iconList, .iconListTyping {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   @media screen and (max-width: 600px){
     min-height: 32px;
     align-items: flex-end;
