@@ -1,8 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
 
+type selectedLanguageType = 'ua' | 'ru' | 'en';
+
 interface siteLanguageState {
-    selected: string,
+    selected: selectedLanguageType,
     languages: string[]
 }
 
@@ -15,7 +17,7 @@ const siteLanguageSlice = createSlice({
     name: 'siteLanguage',
     initialState,
     reducers: {
-        selectSiteLanguage: (state, action: PayloadAction<string>) => {
+        selectSiteLanguage: (state, action: PayloadAction<selectedLanguageType>) => {
             state.selected = action.payload
         },
         selectLanguages: (state, action: PayloadAction<string[]>) => {

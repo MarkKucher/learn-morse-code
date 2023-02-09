@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "../styles/DefaultIcon.module.scss";
 import { faTable } from "@fortawesome/free-solid-svg-icons";
-import MorseCodeTable from "./MorseCodeTable";
+import MorseCodeTable from "./morse-code-table/MorseCodeTable";
 
 const MorseCodeIcon = () => {
     const [shouldShowModal, setShouldShowModal] = useState<boolean>(false)

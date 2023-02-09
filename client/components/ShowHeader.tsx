@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styles from "../styles/ShowHeader.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {selectShowHeader, toggleShowHeader} from "../store/slices/showHeader";

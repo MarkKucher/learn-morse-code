@@ -1,12 +1,13 @@
-import React from 'react';
-import Modal from "./modals/Modal";
-import {useAppSelector} from "../hooks/redux";
-import {selectSiteLanguageState} from "../store/slices/siteLanguage";
-import styles from "../styles/DefaultModal.module.scss";
+import React, {useState} from 'react';
+import Modal from "../modals/Modal";
+import {useAppSelector} from "../../hooks/redux";
+import {selectSiteLanguageState} from "../../store/slices/siteLanguage";
+import styles from "../../styles/DefaultModal.module.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import {selectTranslator} from "../store/slices/translator";
-import {getObjectValuesTypeFriendly} from "../adjuvant/getKeyValueTypeFriendly";
+import {selectTranslator} from "../../store/slices/translator";
+import {getObjectValuesTypeFriendly} from "../../adjuvant/getKeyValueTypeFriendly";
+import MorseCodeContent from "./MorseCodeContent";
 
 interface MorseCodeTableProps {
     close: Function;
@@ -27,15 +28,7 @@ const MorseCodeTable: React.FC<MorseCodeTableProps> = ({close}) => {
                         <FontAwesomeIcon icon={faXmark}/>
                     </div>
                 </div>
-                <div className={styles.contentCentered}>
-                    <div className={styles.table}>
-                        {getObjectValuesTypeFriendly(translationRelationships).map((value, index) => <div key={value}>
-                            <div>{Object.keys(translationRelationships)[index]}</div>
-                            <div>-</div>
-                            <div>{value}</div>
-                        </div>)}
-                    </div>
-                </div>
+                <MorseCodeContent/>
             </div>
         </Modal>
     );

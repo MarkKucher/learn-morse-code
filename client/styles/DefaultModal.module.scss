@@ -24,4 +24,17 @@
   @include modal.content;
   justify-items: center;
   justify-content: center;
+  overflow-y: clip;
+}
+
+.title {
+  @include modal.title;
+}
+
+.footer {
+  @include modal.footer;
+}
+
+.options {
+  @include modal.options;
 }

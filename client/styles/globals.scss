@@ -65,6 +65,30 @@ div::-webkit-scrollbar {
   }
 }
 
+.MorseCodeTableType {
+  &-enter {
+    animation: swipeFromRight 300;
+  }
+  &-exit {
+    animation: swipeToLeft 300;
+  }
+}
+
+@keyframes swipeToLeft {
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes swipeFromRight {
+  from {
+    transform: translateX(100px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 @keyframes showOfferedLanguages {
   from {
     transform: translateX(10rem);
