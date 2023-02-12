@@ -1,8 +1,6 @@
 import {uaMorse} from "../../utils/morse-code-ua";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
-import {enMorse} from "../../utils/morse-code-en";
-import {ruMorse} from "../../utils/morse-code-ru";
 import {MorseCodeType} from "../../utils/morse-code-language";
 
 export type singleChar = {value: string, isHighlighted?: boolean, isTranslated?: boolean};
@@ -15,7 +13,7 @@ interface translatorState {
     isWriting: boolean;
     isForbiddenKeyPressed: boolean;
     isFocused: boolean;
-    translationRelationships: typeof uaMorse | typeof enMorse | typeof ruMorse;
+    translationRelationships: MorseCodeType;
     isTranslationVisible: boolean;
     textToCheck: string[];
     correctIndexes: number[];

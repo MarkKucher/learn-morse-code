@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from "../../styles/SiteLanguage.module.scss"
 import {useDispatch, useSelector} from "react-redux";
-import {selectSiteLanguage, selectSiteLanguageState} from "../../store/slices/siteLanguage";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
+import {selectedLanguageType, selectSiteLanguage, selectSiteLanguageState} from "../../store/slices/siteLanguage";
+import {CSSTransition} from "react-transition-group";
 
 const SiteLanguage = () => {
     const {selected, languages} = useSelector(selectSiteLanguageState);
@@ -19,7 +19,7 @@ const SiteLanguage = () => {
         }
     }
 
-    const selectIcon = (l: string) => {
+    const selectIcon = (l: selectedLanguageType) => {
         return () => {
             dispatch(selectSiteLanguage(l))
             setTimeout(() => {
