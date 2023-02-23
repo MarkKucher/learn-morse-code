@@ -19,7 +19,8 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.4",
     "react-transition-group": "^4.4.5",
-    "sass": "^1.55.0"
+    "sass": "^1.55.0",
+    "swiper": "^9.0.5"
   },
   "devDependencies": {
     "@jest/globals": "^29.3.1",

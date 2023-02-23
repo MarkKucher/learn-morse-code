@@ -32,7 +32,6 @@
 
 @mixin content {
   width: 100%;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   height: 90%;
@@ -53,6 +52,7 @@
 @mixin table {
   width: 100%;
   height: 80%;
+  flex: 8;
   padding: 5px;
   display: grid;
   align-content: space-around;
@@ -83,6 +83,7 @@
   border-bottom: 2px solid lightgray;
   width: 100%;
   height: 10%;
+  flex: 1;
 }
 
 @mixin footer {
@@ -93,6 +94,7 @@
   flex-direction: row;
   width: 100%;
   height: 10%;
+  flex: 1;
   align-items: center;
   justify-content: space-between;
   border-top: 2px solid lightgray;

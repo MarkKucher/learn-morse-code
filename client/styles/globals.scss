@@ -65,12 +65,21 @@ div::-webkit-scrollbar {
   }
 }
 
-.MorseCodeTableType {
+.switchOutputType {
   &-enter {
-    animation: swipeFromRight 300;
+    transform: translateX(100px);
+  }
+  &-enter-active {
+    transform: translateX(0);
   }
   &-exit {
-    animation: swipeToLeft 300;
+    transform: translateX(0);
+  }
+  &-exit-active {
+    transform: translateX(-100px);
+  }
+  &-exit-active, &-enter-active {
+    transition: transform 300ms;
   }
 }
 
