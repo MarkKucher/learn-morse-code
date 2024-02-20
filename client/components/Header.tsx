@@ -14,7 +14,7 @@ const Header = () => {
     const nodeRef = useRef(null)
 
     return (
-        <div className={styles.main}>
+        <header className={styles.main}>
             <CSSTransition
                 in={showHeader}
                 nodeRef={nodeRef}
@@ -35,7 +35,7 @@ const Header = () => {
                 </div>
             </CSSTransition>
             <ShowHeader/>
-        </div>
+        </header>
     );
 };
 export default memo(Header);
