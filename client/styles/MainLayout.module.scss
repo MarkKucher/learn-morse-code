@@ -1,8 +1,6 @@
 .main {
-  width: 100vw;
-  height: 100vh;
-  min-width: 355px;
-  min-height: 450px;
+  min-width: 100vw;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +14,8 @@
 }
 
 .picture {
-  position: fixed;
+  width: 100vw;
+  min-height: 100vh;
   background-image: url("../assets/old-gray-cement-wall-backgrounds_34552-325.webp");
   background-repeat: no-repeat;
   background-size: cover;

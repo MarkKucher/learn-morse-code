@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import styles from "../../styles/DefaultModal.module.scss";
 import {getObjectValuesTypeFriendly} from "../../adjuvant/getKeyValueTypeFriendly";
 import {useAppSelector} from "../../hooks/redux";
@@ -6,35 +6,9 @@ import {selectTranslator} from "../../store/slices/translator";
 import {selectSiteLanguageState} from "../../store/slices/siteLanguage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faCircle, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import {MorseCodeType} from "../../utils/morse-code-language";
 import {noMorse} from "../../utils/morse-code-no";
 import {specialSymbolsMorse} from "../../utils/morse-code-special-symbols";
 import {specialCharactersMorse} from "../../utils/morse-code-special-characters";
-import {SwiperSlide, Swiper, useSwiper} from "swiper/react";
-
-interface numberType {
-    ua: 'цифри',
-    ru: 'цифры',
-    en: 'numbers'
-}
-
-interface symbolType {
-    ua: 'символи',
-    ru: 'символы',
-    en: 'symbols'
-}
-
-interface specialCharactersType {
-    ua: 'спеціальні символи',
-    ru: 'специальные символы',
-    en: 'special characters'
-}
-
-interface letterType {
-    ua: 'букви',
-    ru: 'буквы',
-    en: 'letters'
-}
 
 const MorseCodeContent = () => {
     const {translationRelationships} = useAppSelector(selectTranslator)
@@ -67,16 +41,18 @@ const MorseCodeContent = () => {
     }
 
     return (
-        <div className={styles.contentCentered}>
-            <div className={styles.title}>
-                <h2>{order[currentType][selected]}</h2>
-            </div>
-            <div className={styles.table}>
-                {getObjectValuesTypeFriendly(order[currentType].table).map((value, index) => <div key={value}>
+        <>
+            <div className={styles.contentCentered}>
+                <div className={styles.title}>
+                    <h2>{order[currentType][selected]}</h2>
+                </div>
+                <div className={styles.table}>
+                    {getObjectValuesTypeFriendly(order[currentType].table).map((value, index) => <div key={value}>
                         <div>{Object.keys(order[currentType].table)[index]}</div>
                         <div>-</div>
                         <div>{value}</div>
-                </div>)}
+                    </div>)}
+                </div>
             </div>
             <footer className={styles.footer}>
                 <div className={styles.icon} onClick={changeOutputType(false)}>
@@ -92,7 +68,7 @@ const MorseCodeContent = () => {
                     <FontAwesomeIcon icon={faChevronRight}/>
                 </div>
             </footer>
-        </div>
+        </>
     );
 };
 
